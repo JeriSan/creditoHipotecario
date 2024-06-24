@@ -1,0 +1,77 @@
+<div>
+  <div class="container" style="overflow-x:auto;">
+      <h1>Créditos Hipotecario</h1>
+      <table id="personasTable">
+          <thead>
+              <tr>
+                  <th>CLIENTE</th>
+                  <th>PROYECTO</th>
+                  <th>FECHA</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let persona of personas">
+                  <td>{{persona.cliente}}</td>
+                  <td>{{persona.proyecto}}</td>
+                  <td>{{persona.fecha}}</td>
+                  <td>
+                    <p-button
+                    (click)="personaDetalle(persona)" 
+                    label="Accept"
+                    styleClass="p-button-success"> 
+                </p-button> 
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <ng-template #sinusuarios><p>No hay usuarios.</p></ng-template>
+  </div>
+<p-dialog
+        header="GeeksforGeeks"
+        [(visible)]="BasicShow" 
+        [style]="{width: '30vw'}" 
+        [draggable]="false"  
+        [resizable]="false"> 
+        <form #f="ngForm" (ngSubmit)="submit(personaSelected)">
+        <table>
+          <tr>
+            <td>FECHA</td>
+            <td>
+              <input type="text" pInputText [value]="personaSelected.fecha" />
+            </td>
+          </tr>
+          <tr>
+            <td>MONTO</td>
+            <td>
+              <input type="text" pInputText [value]="personaSelected.monto" />
+            </td>
+          </tr>
+          <tr>
+            <td>SUBIR</td>
+            <td>
+              <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"
+              accept="image/*"  [auto]="true"></p-fileUpload>
+            </td>
+          </tr>
+        </table>
+      </form>
+        <ng-template pTemplate="footer"> 
+            <p-button
+                (click)="BasicShow = false" 
+                label="Accept"
+                styleClass="p-button-success"> 
+            </p-button> 
+              
+            <p-button
+                (click)="BasicShow = false" 
+                label="Reject"
+                styleClass="p-button-danger"> 
+            </p-button> 
+        </ng-template> 
+    </p-dialog> 
+    <p-button
+        (click)="showDialog()" 
+        label="Short Content Modal"> 
+    </p-button> 
+    <router-outlet />
